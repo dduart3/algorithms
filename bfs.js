@@ -45,23 +45,23 @@ const solve = (s) => {
   return prev;
 };
 
-const reconstructPath = (s, e, prev) => {
+const reconstructPath = (start, end, prev) => {
   const path = [];
 
-  for (let at = e; prev[at] !== null; at = prev[at]) {
+  for (let at = end; prev[at] !== null; at = prev[at]) {
     path.push(prev[at]);
   }
   path.reverse();
 
-  if (path[0] == s) {
+  if (path[0] == start) {
     return path;
   }
   return [];
 };
 
-const breadthFirstSearch = (s, e) => {
-  const prev = solve(s);
-  return reconstructPath(s, e, prev);
+const breadthFirstSearch = (start, end) => {
+  const prev = solve(start);
+  return reconstructPath(start, end, prev);
 };
 
 console.log(breadthFirstSearch(0, 4));
