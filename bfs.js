@@ -1,12 +1,12 @@
 //queue data structure factory function
 const Queue = () => {
-  const arr = [];
+  const _arr = [];
 
-  const enqueue = (element) => arr.push(element);
+  const enqueue = (element) => _arr.push(element);
 
-  const dequeue = () => arr.shift();
+  const dequeue = () => _arr.shift();
 
-  const isEmpty = () => arr.length < 1;
+  const isEmpty = () => _arr.length < 1;
 
   return {
     enqueue,
