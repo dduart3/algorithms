@@ -20,13 +20,13 @@ const adjacentList = [[1, 2], [3], [4], [], []];
 
 const adjacentListSize = adjacentList.length;
 
-const solve = (s) => {
+const solve = (start) => {
   const queue = Queue();
-  queue.enqueue(s);
+  queue.enqueue(start);
 
   const visited = Array(adjacentListSize).fill(false);
 
-  visited[s] = true;
+  visited[start] = true;
 
   const prev = Array(adjacentListSize).fill(null);
 
