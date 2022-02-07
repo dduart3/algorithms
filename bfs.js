@@ -1,75 +1,65 @@
 const Queue = () => {
-    const arr = [];
+  const arr = [];
 
-    const enqueue = (element) => arr.push(element);
-    
-    const dequeue = () => arr.shift();
+  const enqueue = (element) => arr.push(element);
 
-    const isEmpty = () => arr.length < 1;
+  const dequeue = () => arr.shift();
 
-    return {
-        enqueue,
-        dequeue,
-        isEmpty
-    }
-}
+  const isEmpty = () => arr.length < 1;
 
-const g = [
-    [1, 2],
-    [ 3],
-    [ 4],
-    [],
-    []
-]
+  return {
+    enqueue,
+    dequeue,
+    isEmpty,
+  };
+};
 
-const n = g.length
+const g = [[1, 2], [3], [4], [], []];
 
-const  solve = (s) =>{
-    const q = Queue();
-    q.enqueue(s);
+const n = g.length;
 
-    const visited = Array(n).fill(false);
+const solve = (s) => {
+  const q = Queue();
+  q.enqueue(s);
 
-    visited[s] = true;
+  const visited = Array(n).fill(false);
 
-    const prev = Array(n).fill(null);
+  visited[s] = true;
 
-    while (!q.isEmpty()){
-        let node = q.dequeue();
-        let neighbourds = g[node];
-        
-        neighbourds.forEach(next => {
-            if(!visited[next]){ 
-                q.enqueue(next);
-                visited[next] = true;
-                prev[next] = node;
-            }
-        });
-    }
-    return prev;
-}
+  const prev = Array(n).fill(null);
+
+  while (!q.isEmpty()) {
+    let node = q.dequeue();
+    let neighbourds = g[node];
+
+    neighbourds.forEach((next) => {
+      if (!visited[next]) {
+        q.enqueue(next);
+        visited[next] = true;
+        prev[next] = node;
+      }
+    });
+  }
+  return prev;
+};
 
 const reconstructPath = (s, e, prev) => {
-    const path = [];
+  const path = [];
 
-    for (let at = e; prev[at] !== null; at = prev[at]){
-        path.push(prev[at])
-        
-    }
-    path.reverse();
+  for (let at = e; prev[at] !== null; at = prev[at]) {
+    path.push(prev[at]);
+  }
+  path.reverse();
 
-    if(path[0] == s){
-        return path
-    }
-    return [];
+  if (path[0] == s) {
+    return path;
+  }
+  return [];
+};
 
-}
+const breadthFirstSearch = (s, e) => {
+  const prev = solve(s);
+  return reconstructPath(s, e, prev);
+};
 
-
-const bfs =(s, e) =>{
-    const prev = solve(s)
-    return reconstructPath(s,e, prev)
-}
-
-
-console.log(bfs(0, 3))
+console.log(breadthFirstSearch(0, 4));
