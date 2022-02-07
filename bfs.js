@@ -1,3 +1,4 @@
+//queue data structure factory function
 const Queue = () => {
   const arr = [];
 
@@ -14,27 +15,28 @@ const Queue = () => {
   };
 };
 
-const g = [[1, 2], [3], [4], [], []];
+//dummy adjacent list
+const adjacentList = [[1, 2], [3], [4], [], []];
 
-const n = g.length;
+const adjacentListSize = adjacentList.length;
 
 const solve = (s) => {
-  const q = Queue();
-  q.enqueue(s);
+  const queue = Queue();
+  queue.enqueue(s);
 
-  const visited = Array(n).fill(false);
+  const visited = Array(adjacentListSize).fill(false);
 
   visited[s] = true;
 
-  const prev = Array(n).fill(null);
+  const prev = Array(adjacentListSize).fill(null);
 
-  while (!q.isEmpty()) {
-    let node = q.dequeue();
-    let neighbourds = g[node];
+  while (!queue.isEmpty()) {
+    let node = queue.dequeue();
+    let neighbourds = adjacentList[node];
 
     neighbourds.forEach((next) => {
       if (!visited[next]) {
-        q.enqueue(next);
+        queue.enqueue(next);
         visited[next] = true;
         prev[next] = node;
       }
